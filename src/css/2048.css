@@ -1,0 +1,74 @@
+
+html,
+body,
+#app {
+    height: 100%;
+}
+.lattice {
+    position: absolute;
+    margin-top: -483px;
+    margin-left: 5px;
+}
+.lattice > div {
+    height: 114px;
+    width: 114px;
+    position: absolute;
+    margin: 3px 1px;
+    background-color: #f3d13d;
+    font-size: 42px;
+    color: #fff;
+    line-height: 114px;
+    text-align: center;
+    /*-webkit-transition: left .5s ease-in-out, top .5s ease-in-out;*/
+    /*-moz-transition: left .5s ease-in-out, top .5s ease-in-out;*/
+    /*-ms-transition: left .5s ease-in-out, top .5s ease-in-out;*/
+    /*-o-transition: left .5s ease-in-out, top .5s ease-in-out;*/
+    /*transition: left .5s ease-in-out, top .5s ease-in-out;*/
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+.back-table {
+    border-spacing: 0;
+    border: #bebdbd 3px solid;
+    width: 486px;
+    /*height: 480px;*/
+    /*margin-left: 5px;*/
+}
+.back-table td {
+    border: #bebdbd 3px solid;
+    padding: 0;
+    height: 114px;
+    width: 117px;
+}
+/*.p-1-1 {*/
+    /*transform: translate3d(0)*/
+/*}*/
+
+/*.i-1 {*/
+    /*transform: translateY(0);*/
+/*}*/
+/*.i-2 {*/
+    /*transform: translateY(120px);*/
+/*}*/
+/*.i-3 {*/
+    /*transform: translateY(240px);*/
+/*}*/
+/*.i-4 {*/
+    /*transform: translateY(360px);*/
+/*}*/
+/*.j-1 {*/
+    /*transform: translateX(0);*/
+/*}*/
+/*.j-2 {*/
+    /*transform: translateX(120px);*/
+/*}*/
+/*.j-3 {*/
+    /*transform: translateX(240px);*/
+/*}*/
+/*.j-4 {*/
+    /*transform: translateX(360px);*/
+/*}*/
