@@ -3,40 +3,79 @@ import AppBar from 'material-ui/lib/app-bar';
 import Card from 'material-ui/lib/card/card';
 import CardTitle from 'material-ui/lib/card/card-title';
 
+
+import MenuItem from 'material-ui/lib/menu/menu-item';
+import IconButton from 'material-ui/lib/icon-button';
+import RefreshIcon from 'material-ui/lib/svg-icons/navigation/refresh';
+
 const Swipeable = require('react-swipeable');
 const Game2048 = require('../components/2048-lattices.jsx');
 
 export default class GamePage extends React.Component {
+
 
   constructor(props) {
     super(props);
     document.onkeydown = this.keyDownHandle.bind(this);
 
     var lattices = [[],[],[],[]];
-    for (var i = 0; i < 4; i++) {
-      for (var j = 0; j < 4; j++) {
-        lattices[i][j] = {
-          num: 0,
-          id: i * 4 + j
-        };
-      }
-    }
     var num = [
       [2, 2, 2, 2],
       [2, 2, 2, 2],
       [2, 2, 2, 2],
       [2, 2, 2, 2]
     ];
-    for (i = 0; i < 4; i++) {
-      for (j = 0; j < 4; j++) {
-        lattices[i][j].num = num[i][j];
+    for (var i = 0; i < 4; i++) {
+      for (var j = 0; j < 4; j++) {
+        lattices[i][j] = {
+          num: num[i][j],
+          id: i * 4 + j
+        };
       }
     }
     this.state = {
       lattices: lattices,
       nextId: 16,
-      soccer: 100
+      soccer: 0
+    };
+  }
+
+  init() {
+    var lattices = [[],[],[],[]];
+    var num = [
+      [2, 2, 2, 2],
+      [2, 2, 2, 2],
+      [2, 2, 2, 2],
+      [2, 2, 2, 2]
+    ];
+    for (var i = 0; i < 4; i++) {
+      for (var j = 0; j < 4; j++) {
+        lattices[i][j] = {
+          num: num[i][j],
+          id: i * 4 + j
+        };
+      }
     }
+    this.setState({
+
+      lattices: lattices,
+      nextId: 16,
+      soccer: 0
+    })
+
+  }
+
+  //init() {
+  //  this.setState = {
+  //    lattices: lattices,
+  //    nextId: 16,
+  //    soccer: 100
+  //  }
+  //
+  //}
+
+  handleRefresh() {
+    this.init();
   }
 
 
@@ -205,6 +244,9 @@ export default class GamePage extends React.Component {
   }
 
   keyDownHandle(e) {
+    if (this.isMoving) {
+      return false;
+    }
     var keynum = window.event ? e.keyCode : e.which;
     var KEY = {
       LEFT :    37,
@@ -243,14 +285,22 @@ export default class GamePage extends React.Component {
     }
 
     var _this = this;
+    this.isMoving = true;
     setTimeout(function () {
       _this.createNewLattice();
+      _this.isMoving = false;
+      if (_this.isOver()) {
+        alert("Game over");
+      }
     }, 450)
 
   }
 
   handleSwiped(dire) {
 
+    if (this.isMoving) {
+      return false;
+    }
     var isMoved = false;
     switch (dire) {
       case 1:
@@ -273,13 +323,19 @@ export default class GamePage extends React.Component {
 
     this.setState({lattices: this.state.lattices});
 
+
     if (!isMoved) {
       return;
     }
 
+    this.isMoving = true;
     var _this = this;
     setTimeout(function () {
       _this.createNewLattice();
+      _this.isMoving = false;
+      if (_this.isOver()) {
+        alert("Game over");
+      }
     }, 450)
   }
   handleSwipedUp(e) {
@@ -313,8 +369,41 @@ export default class GamePage extends React.Component {
     var newNum = this.state.lattices[i][j].num;
     this.state.lattices[i][j] = this.createNewBlank();
     this.state.soccer += addSoccor;
+  }
+
+  isOver() {
+    var lattices = this.state.lattices;
+    var i, j, k, l, K, L;
+    for (i = 0; i < 4; i++) {
+      for (j = 0; j < 4; j++) {
+        if (lattices[i][j].num == 0) {
+          console.log('Not Full');
+          return false;
+        }
+
+        if (i == 0) {
+
+        }
 
 
+        k = i == 0 ? 0 : i - 1;
+        K = i == 3 ? 4 : i + 2;
+        l = j == 0 ? 0 : j - 1;
+        L = j == 3 ? 4 : j + 2;
+
+        for (; k < K; k++) {
+          for (; l < L; l++) {
+            if ((k == i && l == j) || (k != i && l != j)) {
+              continue;
+            }
+            if (lattices[k][l].num == lattices[i][j].num) {
+              return false;
+            }
+          }
+        }
+      }
+    }
+    return true;
   }
 
   createNewBlank() {
@@ -363,25 +452,34 @@ export default class GamePage extends React.Component {
   render() {
     var title = 'Soccer : ' + this.state.soccer;
     return (
-      <div style={{width: '100%', height: '100%', backgroundColor: '#1b91d1'}}>
-        <div style={{maxWidth: '486px', margin: '0 auto', paddingTop: '100px'}}>
-          <Card>
-            <CardTitle
-              title={title}  style={{color: '#fff'}} />
-          </Card>
-          <Card style={{marginTop: '50px'}}>
-            <Swipeable
-              onSwipedLeft={this.handleSwipedLeft.bind(this)}
-              onSwipedRight={this.handleSwipedRight.bind(this)}
-              onSwipedUp={this.handleSwipedUp.bind(this)}
-              onSwipedDown={this.handleSwipedDown.bind(this)}
-              onSwiping={this.handleTouchStart.bind(this)}
-              flickThreshold={0.6}
-              delta={1}
-            >
-              <Game2048  ref="game" lattices={this.state.lattices}/>
-            </Swipeable>
-          </Card>
+      <div style={{height: '100%'}}>
+        <AppBar
+          showMenuIconButton={false}
+          style={{position: 'absolute'}}
+          title='2048'
+          iconElementRight={
+            <IconButton onClick={this.handleRefresh.bind(this)}><RefreshIcon /></IconButton>}
+        />
+        <div style={{width: '100%', height: '100%', backgroundColor: '#1b91d1'}}>
+          <div style={{maxWidth: '486px', margin: '0 auto', paddingTop: '100px'}}>
+            <Card>
+              <CardTitle
+                title={title}  style={{color: '#fff'}} />
+            </Card>
+            <Card style={{marginTop: '50px'}}>
+              <Swipeable
+                onSwipedLeft={this.handleSwipedLeft.bind(this)}
+                onSwipedRight={this.handleSwipedRight.bind(this)}
+                onSwipedUp={this.handleSwipedUp.bind(this)}
+                onSwipedDown={this.handleSwipedDown.bind(this)}
+                onSwiping={this.handleTouchStart.bind(this)}
+                flickThreshold={0.6}
+                delta={1}
+              >
+                <Game2048  ref="game" lattices={this.state.lattices}/>
+              </Swipeable>
+            </Card>
+          </div>
         </div>
       </div>
     );

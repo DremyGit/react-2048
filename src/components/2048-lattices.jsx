@@ -4,9 +4,6 @@ export default  class Game2048 extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      lattices: this.props.lattices
-    }
   }
 
   render() {
@@ -14,7 +11,7 @@ export default  class Game2048 extends React.Component {
     var lattices = [];
     for (var i = 0; i < 4; i++)
       for (var j = 0; j < 4; j++) {
-        var lattice = this.state.lattices[i][j];
+        var lattice = this.props.lattices[i][j];
         if (lattice.num == 0) {
           continue;
         }
