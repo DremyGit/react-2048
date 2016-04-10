@@ -20,10 +20,10 @@ export default class GamePage extends React.Component {
 
     var lattices = [[],[],[],[]];
     var num = [
-      [2, 2, 2, 2],
-      [2, 2, 2, 2],
-      [2, 2, 2, 2],
-      [2, 2, 2, 2]
+      [0, 0, 0, 2],
+      [0, 0, 0, 0],
+      [2, 0, 0, 0],
+      [4, 2, 0, 0]
     ];
     for (var i = 0; i < 4; i++) {
       for (var j = 0; j < 4; j++) {
@@ -43,10 +43,10 @@ export default class GamePage extends React.Component {
   init() {
     var lattices = [[],[],[],[]];
     var num = [
-      [2, 2, 2, 2],
-      [2, 2, 2, 2],
-      [2, 2, 2, 2],
-      [2, 2, 2, 2]
+      [0, 0, 0, 2],
+      [0, 0, 0, 0],
+      [2, 0, 0, 0],
+      [4, 2, 0, 0]
     ];
     for (var i = 0; i < 4; i++) {
       for (var j = 0; j < 4; j++) {
