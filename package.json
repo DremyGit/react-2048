@@ -38,5 +38,8 @@
   "bugs": {
     "url": "https://github.com/DremyGit/react-2048/issues"
   },
-  "homepage": "https://github.com/DremyGit/react-2048#readme"
+  "homepage": "https://github.com/DremyGit/react-2048#readme",
+  "dependencies": {
+    "react-addons-css-transition-group": "^0.14.1"
+  }
 }

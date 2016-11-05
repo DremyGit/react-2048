@@ -20,9 +20,9 @@ export default class GamePage extends React.Component {
 
     var lattices = [[],[],[],[]];
     var num = [
-      [0, 0, 0, 2],
       [0, 0, 0, 0],
-      [2, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 2, 2],
       [4, 2, 0, 0]
     ];
     for (var i = 0; i < 4; i++) {
@@ -36,16 +36,16 @@ export default class GamePage extends React.Component {
     this.state = {
       lattices: lattices,
       nextId: 16,
-      soccer: 0
+      score: 0
     };
   }
 
   init() {
     var lattices = [[],[],[],[]];
     var num = [
-      [0, 0, 0, 2],
       [0, 0, 0, 0],
-      [2, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 2, 2],
       [4, 2, 0, 0]
     ];
     for (var i = 0; i < 4; i++) {
@@ -60,7 +60,7 @@ export default class GamePage extends React.Component {
 
       lattices: lattices,
       nextId: 16,
-      soccer: 0
+      score: 0
     })
 
   }
@@ -69,7 +69,7 @@ export default class GamePage extends React.Component {
   //  this.setState = {
   //    lattices: lattices,
   //    nextId: 16,
-  //    soccer: 100
+  //    score: 100
   //  }
   //
   //}
@@ -290,7 +290,9 @@ export default class GamePage extends React.Component {
       _this.createNewLattice();
       _this.isMoving = false;
       if (_this.isOver()) {
-        alert("Game over");
+        setTimeout(function() {
+          alert("Game over");
+        }, 500)
       }
     }, 450)
 
@@ -368,7 +370,7 @@ export default class GamePage extends React.Component {
     this.state.lattices[x][y].num = this.state.lattices[i][j].num * 2;
     var newNum = this.state.lattices[i][j].num;
     this.state.lattices[i][j] = this.createNewBlank();
-    this.state.soccer += addSoccor;
+    this.state.score += addSoccor;
   }
 
   isOver() {
@@ -450,7 +452,7 @@ export default class GamePage extends React.Component {
   }
 
   render() {
-    var title = 'Soccer : ' + this.state.soccer;
+    var title = 'Score : ' + this.state.score;
     return (
       <div style={{height: '100%'}}>
         <AppBar

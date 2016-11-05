@@ -1,4 +1,5 @@
 import React from 'react';
+import AnimationGroup from 'react-addons-css-transition-group'
 
 export default  class Game2048 extends React.Component {
 
@@ -16,7 +17,7 @@ export default  class Game2048 extends React.Component {
           continue;
         }
         //var className = 'i-' + (i + 1) + ' j-' + (j + 1);
-        var className = 'p-' + (i + 1) + '-' + (j + 1);
+        var className = 'p-' + (i + 1) + '-' + (j + 1) + ' ' + 'n-' + lattice.num;
         lattices[lattice.id] = <div className={className} key={lattice.id}>{lattice.num}</div>
       }
     return (
@@ -30,7 +31,13 @@ export default  class Game2048 extends React.Component {
           </tbody>
         </table>
         <div className="lattice">
-          {lattices}
+          <AnimationGroup
+            transitionName="lattice-anima"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={1000}
+          >
+            {lattices}
+          </AnimationGroup>
         </div>
       </div>
 
