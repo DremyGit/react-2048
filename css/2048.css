@@ -9,12 +9,11 @@ body,
     margin-top: -483px;
     margin-left: 5px;
 }
-.lattice > div {
+.lattice > span > div {
     height: 114px;
     width: 114px;
     position: absolute;
     margin: 3px 1px;
-    background-color: #f3d13d;
     font-size: 42px;
     color: #fff;
     line-height: 114px;
@@ -37,3 +36,19 @@ body,
     height: 114px;
     width: 117px;
 }
+
+.lattice-anima-enter {
+    opacity: 0;
+}
+.lattice-anima-enter-active {
+    opacity: 1;
+    transition: opacity .5s ease;
+}
+.lattice-anima-leave {
+    opacity: 1;
+}
+.lattice-anima-leave-active {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+

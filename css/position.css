@@ -109,3 +109,39 @@
   -ms-transform: translate3d(360px, 360px, 0);
   -o-transform: translate3d(360px, 360px, 0);
   transform: translate3d(360px, 360px, 0); }
+
+.n-2 {
+  background-color: #EEE4DA; }
+
+.n-4 {
+  background-color: #EDE0C8; }
+
+.n-8 {
+  background-color: #F2B179; }
+
+.n-16 {
+  background-color: #F49563; }
+
+.n-32 {
+  background-color: #F5794D; }
+
+.n-64 {
+  background-color: #F55D37; }
+
+.n-128 {
+  background-color: #EEE863; }
+
+.n-256 {
+  background-color: #EDB04D; }
+
+.n-512 {
+  background-color: #ECB04D; }
+
+.n-1024 {
+  background-color: #EB9437; }
+
+.n-2048 {
+  background-color: #EA7821; }
+
+.n-4096 {
+  background-color: #EA7821; }
